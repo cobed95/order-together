@@ -9,17 +9,16 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {SafeAreaView, StyleSheet, ScrollView, View, Text} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-import {Header} from 'react-native-elements';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-
 import {AppColors} from './src/global';
-import AppHeader from './src/components/AppHeader';
+
 import Main from './src/screens/Main';
 import Order from './src/screens/Order';
 import Wait from './src/screens/Wait';
+import MatchSuccess from './src/screens/MatchSuccess';
 
 const Stack = createStackNavigator();
 
@@ -58,6 +57,7 @@ const App: () => React$Node = () => {
         <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="Order" component={Order} />
         <Stack.Screen name="Wait" component={Wait} />
+        <Stack.Screen name="MatchSuccess" component={MatchSuccess} />
       </Stack.Navigator>
     </NavigationContainer>
   );

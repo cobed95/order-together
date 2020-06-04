@@ -1,17 +1,55 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {Button} from 'react-native-elements';
 import {AppColors} from '../global';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const Wait = ({routes, navigation}) => {
+  const [match, setMatch] = useState(false);
+
   setTimeout(() => {
-    navigation.navigate('Main');
+    // navigation.navigate('MatchSuccess');
+    setMatch(true);
   }, 5000);
+
+  const Prompt = () => {
+    if (!match)
+      return <Text style={styles.message}>고객님의 주문이 처리중입니다.</Text>;
+
+    return (
+      <View>
+        <Text style={styles.message}>함께 살 동료를 찾았어요!</Text>
+        <Button
+          title="지금 수령 장소 정하기"
+          buttonStyle={{
+            backgroundColor: Colors.white,
+            margin: 10,
+          }}
+          titleStyle={{
+            color: AppColors.primary,
+          }}
+          onPress={() => navigation.navigate('MatchSuccess')}
+        />
+        <Button
+          title="나중에 할래요"
+          buttonStyle={{
+            backgroundColor: Colors.white,
+            margin: 10,
+          }}
+          titleStyle={{
+            color: AppColors.primary,
+          }}
+          onPress={() => navigation.navigate('Main')}
+        />
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color={Colors.white} />
-      <Text style={styles.message}>고객님의 주문이 처리중입니다.</Text>
+      <ActivityIndicator animating={!match} size="large" color={Colors.white} />
+      <Prompt />
+      {/* <Text style={styles.message}>고객님의 주문이 처리중입니다.</Text> */}
     </View>
   );
 };
@@ -28,6 +66,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
     paddingTop: 50,
+    paddingBottom: 50,
   },
 });
 
