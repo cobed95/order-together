@@ -7,9 +7,6 @@ const Order = ({route, navigation}) => {
   return (
     <View style={styles.container}>
       <OrderRequest {...route.params} navigation={navigation} />
-      {/* <Text>Order Screen</Text>
-      <Text>{name}</Text>
-      <Button onPress={() => navigation.navigate('Main')} title="To Main" /> */}
     </View>
   );
 };

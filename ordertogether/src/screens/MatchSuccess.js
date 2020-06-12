@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
 import {GiftedChat} from 'react-native-gifted-chat';
 
 const initialMessages = [
