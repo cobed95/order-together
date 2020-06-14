@@ -19,6 +19,8 @@ import Main from './src/screens/Main';
 import Order from './src/screens/Order';
 import Wait from './src/screens/Wait';
 import MatchSuccess from './src/screens/MatchSuccess';
+import OnDelivery from './src/screens/OnDelivery';
+import DeliverySuccess from './src/screens/DeliverySuccess';
 
 const Stack = createStackNavigator();
 
@@ -58,6 +60,8 @@ const App: () => React$Node = () => {
         <Stack.Screen name="Order" component={Order} />
         <Stack.Screen name="Wait" component={Wait} />
         <Stack.Screen name="MatchSuccess" component={MatchSuccess} />
+        <Stack.Screen name="OnDelivery" component={OnDelivery} />
+        <Stack.Screen name="DeliverySuccess" component={DeliverySuccess} />
       </Stack.Navigator>
     </NavigationContainer>
   );

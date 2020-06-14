@@ -1,6 +1,7 @@
 export const AppColors = {
   primary: '#01B8E6',
   backgroundText: '#fff',
+  bold: '#015BE3',
 };
 
 export const Fonts = {
