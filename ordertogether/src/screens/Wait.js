@@ -10,7 +10,7 @@ const Wait = ({routes, navigation}) => {
   setTimeout(() => {
     // navigation.navigate('MatchSuccess');
     setMatch(true);
-  }, 5000);
+  }, 2000);
 
   const Prompt = () => {
     if (!match)

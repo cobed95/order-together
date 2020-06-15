@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -67,6 +67,19 @@ const OnDelivery = ({routes, navigation}) => {
       setCount(count + 1);
     }
   };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (count >= 5) {
+        navigation.navigate('DeliverySuccess');
+        clearInterval(interval);
+      }
+      setCount((cnt) => cnt + 1);
+      setDriverCoord((coord) => ({
+        latitude: coord.latitude + 0.0005,
+        longitude: coord.longitude + 0.0001,
+      }));
+    }, 800);
+  }, [navigation, count]);
   const listItems = [
     {
       type: 'circle',
