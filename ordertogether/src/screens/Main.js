@@ -12,11 +12,11 @@ import chamgreen from '../../static/chamgreen.jpeg';
 import toothpaste from '../../static/2080.jpg';
 import soap from '../../static/soap.jpg';
 
-const images = [samdasoo, shampoo, chamgreen, toothpaste, soap];
+const images = {samdasoo, shampoo, chamgreen, toothpaste, soap};
 
 const Main = ({navigation}) => {
   products.forEach((product, i) => {
-    product.image = images[i];
+    product.image = images[product.image];
   });
 
   const MainContent = () => (
