@@ -4,8 +4,18 @@ import {Button, Card, Image} from 'react-native-elements';
 import {User} from '../global';
 
 const OrderRequest = (props) => {
-  const {name, image, volume, demand, price, batchSize, navigation} = props;
-  const saving = price.asUnit - Math.floor(price.asBatch / batchSize);
+  const {
+    name,
+    image,
+    volumeValue,
+    volumeUnit,
+    demand,
+    priceAsUnit,
+    priceAsBatch,
+    batchSize,
+    navigation,
+  } = props;
+  const saving = priceAsUnit - Math.floor(priceAsBatch / batchSize);
 
   return (
     <Card>
@@ -18,7 +28,7 @@ const OrderRequest = (props) => {
         <Text
           style={
             styles.productName
-          }>{`${name} ${volume.value}${volume.unit} ${batchSize}개 묶음`}</Text>
+          }>{`${name} ${volumeValue}${volumeUnit} ${batchSize}개 묶음`}</Text>
         <View style={styles.messages}>
           <View style={styles.regionDemand}>
             <Text style={styles.region}>

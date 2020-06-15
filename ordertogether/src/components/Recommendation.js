@@ -6,7 +6,17 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {User} from '../global';
 
 const Recommendation = (props) => {
-  const {name, image, volume, demand, price, batchSize, navigation} = props;
+  const {
+    name,
+    image,
+    volumeValue,
+    volumeUnit,
+    demand,
+    priceAsUnit,
+    priceAsBatch,
+    batchSize,
+    navigation,
+  } = props;
 
   return (
     <Card style={styles.container}>
@@ -17,14 +27,14 @@ const Recommendation = (props) => {
           PlaceholderContent={<ActivityIndicator />}
         />
         <Text style={styles.productName}>
-          {`${name} ${volume.value}${volume.unit} ${batchSize}개 묶음`}
+          {`${name} ${volumeValue}${volumeUnit} ${batchSize}개 묶음`}
         </Text>
         <View style={styles.description}>
           <Text>{`${User.region} 현재 예상 수요: ${demand}`}</Text>
-          <Text>{`낱개 가격: ₩${price.asUnit}`}</Text>
-          <Text>{`묶음 가격: ₩${price.asBatch}`}</Text>
+          <Text>{`낱개 가격: ₩${priceAsUnit}`}</Text>
+          <Text>{`묶음 가격: ₩${priceAsBatch}`}</Text>
           <Text>{`묶음 성사시 낱개 가격: ₩${Math.floor(
-            price.asBatch / batchSize,
+            priceAsBatch / batchSize,
           )}`}</Text>
         </View>
         <Button
@@ -33,9 +43,11 @@ const Recommendation = (props) => {
             navigation.navigate('Order', {
               name,
               image,
-              volume,
+              volumeValue,
+              volumeUnit,
               demand,
-              price,
+              priceAsUnit,
+              priceAsBatch,
               batchSize,
             })
           }
