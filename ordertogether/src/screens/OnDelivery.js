@@ -70,8 +70,8 @@ const OnDelivery = ({routes, navigation}) => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (count >= 5) {
-        navigation.navigate('DeliverySuccess');
         clearInterval(interval);
+        navigation.navigate('DeliverySuccess');
       }
       setCount((cnt) => cnt + 1);
       setDriverCoord((coord) => ({
