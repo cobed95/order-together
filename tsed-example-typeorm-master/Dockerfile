@@ -19,10 +19,10 @@ RUN apk update && apk add build-base git python
 
 COPY package.json .
 COPY yarn.lock .
+RUN yarn install --production
+
 COPY ./src ./src
 COPY ./dist ./dist
-
-RUN yarn install --production
 
 EXPOSE 8083
 ENV PORT 8083

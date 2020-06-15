@@ -11,6 +11,7 @@ import * as cors from "cors";
 import * as session from "express-session";
 import * as methodOverride from "method-override";
 import {User} from "./entities/User";
+import { TypeORMService } from "@tsed/typeorm";
 
 export const rootDir = __dirname;
 
@@ -69,6 +70,9 @@ export class Server {
   @Inject()
   app: PlatformApplication;
 
+  @Inject()
+  typeormService: TypeORMService;
+
   $beforeRoutesInit(): void | Promise<any> {
     this.app
       .use(GlobalAcceptMimesMiddleware)
@@ -92,7 +96,8 @@ export class Server {
           maxAge: null
         }
       }));
-
-    return null;
+    
+    const conn = this.typeormService.get()
+    return conn.runMigrations();
   }
 }
