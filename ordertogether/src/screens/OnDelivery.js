@@ -69,16 +69,18 @@ const OnDelivery = ({routes, navigation}) => {
   };
   useEffect(() => {
     const interval = setInterval(() => {
-      if (count >= 5) {
-        clearInterval(interval);
-        navigation.navigate('DeliverySuccess');
-      }
       setCount((cnt) => cnt + 1);
       setDriverCoord((coord) => ({
         latitude: coord.latitude + 0.0005,
         longitude: coord.longitude + 0.0001,
       }));
-    }, 800);
+    }, 1000);
+    return () => {
+      if (count >= 5) {
+        clearInterval(interval);
+        navigation.navigate('DeliverySuccess');
+      }
+    };
   }, [navigation, count]);
   const listItems = [
     {
