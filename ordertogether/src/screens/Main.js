@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, SafeAreaView, View} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import AppLayout from '../containers/AppLayout';
 import Recommendation from '../components/Recommendation';
-import {AppColors, products, User} from '../global';
+import {AppColors} from '../global';
 
 import samdasoo from '../../static/samdasoo.jpg';
 import shampoo from '../../static/elastine.png';
@@ -15,13 +15,30 @@ import soap from '../../static/soap.jpg';
 const images = {samdasoo, shampoo, chamgreen, toothpaste, soap};
 
 const Main = ({navigation}) => {
+  const [[products, users], setData] = useState([[], []]);
+  const getData = () =>
+    Promise.all(
+      [
+        'http://localhost:8083/v1/products',
+        'http://localhost:8083/v1/mock',
+      ].map((url) => fetch(url).then((res) => res.json())),
+    );
+
+  useEffect(() => {
+    const initial = () =>
+      getData().then((data) => {
+        setData(data);
+      });
+    initial();
+  }, []);
   products.forEach((product, i) => {
     product.image = images[product.image];
   });
+  const [user] = users;
 
   const MainContent = () => (
     <View>
-      <Text style={styles.title}>{`${User.region}의 오늘의 추천`}</Text>
+      <Text style={styles.title}>{`${user.region}의 오늘의 추천`}</Text>
       {products.map((product, i) => (
         <Recommendation
           {...product}
