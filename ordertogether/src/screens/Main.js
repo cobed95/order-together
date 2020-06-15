@@ -15,7 +15,10 @@ import soap from '../../static/soap.jpg';
 const images = {samdasoo, shampoo, chamgreen, toothpaste, soap};
 
 const Main = ({navigation}) => {
-  const [[products, users], setData] = useState([[], []]);
+  const [products, setProducts] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const getData = () =>
     Promise.all(
       [
@@ -26,28 +29,36 @@ const Main = ({navigation}) => {
 
   useEffect(() => {
     const initial = () =>
-      getData().then((data) => {
-        setData(data);
+      getData().then(([p, u]) => {
+        p.forEach((product, i) => {
+          product.image = images[product.image];
+        });
+        setProducts(p);
+        setUsers(u);
+        setIsLoading(false);
       });
     initial();
   }, []);
-  products.forEach((product, i) => {
-    product.image = images[product.image];
-  });
+
   const [user] = users;
 
-  const MainContent = () => (
-    <View>
-      <Text style={styles.title}>{`${user.region}의 오늘의 추천`}</Text>
-      {products.map((product, i) => (
-        <Recommendation
-          {...product}
-          navigation={navigation}
-          key={`recommendation${i}`}
-        />
-      ))}
-    </View>
-  );
+  const MainContent = () =>
+    isLoading ? (
+      <View>
+        <Text>데이터를 불러오는 중입니다</Text>
+      </View>
+    ) : (
+      <View>
+        <Text style={styles.title}>{`${user.region}의 오늘의 추천`}</Text>
+        {products.map((product, i) => (
+          <Recommendation
+            {...product}
+            navigation={navigation}
+            key={`recommendation${i}`}
+          />
+        ))}
+      </View>
+    );
 
   return AppLayout({Child: MainContent});
 };
