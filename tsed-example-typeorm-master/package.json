@@ -24,7 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "@tsed/common": "5.57.5",
-    "@tsed/core": "5.57.5",
+    "@tsed/core": "5.65.7",
     "@tsed/di": "5.57.5",
     "@tsed/exceptions": "5.57.5",
     "@tsed/passport": "5.57.5",
